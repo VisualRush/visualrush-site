@@ -12,7 +12,10 @@ body {
   color: #ffffff;
 }
 
+/* ===================== */
 /* NAV */
+/* ===================== */
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -61,7 +64,10 @@ body {
   font-size: 1rem;
 }
 
+/* ===================== */
 /* FLAGS */
+/* ===================== */
+
 .flags {
   position: absolute;
   top: 15px;
@@ -79,11 +85,15 @@ body {
   transition: 0.2s;
 }
 
-.flags img:hover, .flags img.active {
+.flags img:hover,
+.flags img.active {
   border-color: #00ff88;
 }
 
+/* ===================== */
 /* HERO */
+/* ===================== */
+
 .hero {
   text-align: center;
   padding: 120px 20px;
@@ -100,7 +110,10 @@ body {
   font-size: 1.1rem;
 }
 
+/* ===================== */
 /* SECTIONS */
+/* ===================== */
+
 .section {
   padding: 100px 60px;
   text-align: center;
@@ -115,7 +128,10 @@ body {
   background: #111;
 }
 
+/* ===================== */
 /* CARDS */
+/* ===================== */
+
 .cards {
   display: flex;
   gap: 30px;
@@ -145,7 +161,10 @@ body {
   font-weight: 600;
 }
 
-/* HOW STEPS */
+/* ===================== */
+/* STEPS */
+/* ===================== */
+
 .steps {
   display: flex;
   gap: 30px;
@@ -161,7 +180,10 @@ body {
   text-align: center;
 }
 
-/* CONTACT FORM */
+/* ===================== */
+/* FORM (BELANGRIJK: NIET SLOPEN) */
+/* ===================== */
+
 form {
   display: flex;
   flex-direction: column;
@@ -170,11 +192,14 @@ form {
   gap: 15px;
 }
 
-form input, form textarea, form select {
+form input,
+form textarea,
+form select {
   padding: 10px;
   border-radius: 6px;
   border: none;
   font-size: 1rem;
+  outline: none;
 }
 
 form textarea {
@@ -182,11 +207,10 @@ form textarea {
   min-height: 80px;
 }
 
-form label input[type="checkbox"] {
-  margin-right: 10px;
-}
-
+/* ===================== */
 /* FOOTER */
+/* ===================== */
+
 footer {
   text-align: center;
   padding: 30px;
@@ -200,7 +224,10 @@ footer a {
   margin: 0 5px;
 }
 
+/* ===================== */
 /* RESPONSIVE */
+/* ===================== */
+
 @media (max-width: 768px) {
   .hero h2 {
     font-size: 2.2rem;
@@ -226,9 +253,9 @@ footer a {
   }
 }
 
-/* ========================= */
-/* CHAT WIDGET */
-/* ========================= */
+/* ===================== */
+/* CHAT WIDGET (100% ISOLATED) */
+/* ===================== */
 
 #vr-btn {
   position: fixed;
@@ -277,29 +304,29 @@ footer a {
   gap: 6px;
 }
 
-.vr-msg {
+#vr-chat .vr-msg {
   max-width: 80%;
   padding: 8px 10px;
   border-radius: 10px;
 }
 
-.vr-msg.client {
+#vr-chat .client {
   background: #222;
   align-self: flex-start;
 }
 
-.vr-msg.agent {
+#vr-chat .agent {
   background: #00ff88;
   color: #000;
   align-self: flex-end;
 }
 
-#vr-form {
+#vr-chat #vr-form {
   display: flex;
   border-top: 1px solid #333;
 }
 
-#vr-input {
+#vr-chat #vr-input {
   flex: 1;
   padding: 10px;
   border: none;
@@ -308,22 +335,22 @@ footer a {
   outline: none;
 }
 
-#vr-send {
+#vr-chat #vr-send {
   background: #00ff88;
   border: none;
   padding: 10px;
   cursor: pointer;
 }
 
-#vr-setup {
+#vr-chat #vr-setup {
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-#vr-setup input,
-#vr-setup textarea {
+#vr-chat #vr-setup input,
+#vr-chat #vr-setup textarea {
   padding: 8px;
   border-radius: 6px;
   border: none;
@@ -331,7 +358,7 @@ footer a {
   color: #fff;
 }
 
-#vr-start {
+#vr-chat #vr-start {
   background: #00ff88;
   border: none;
   padding: 10px;
