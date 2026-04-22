@@ -8,206 +8,209 @@
 </head>
 <body>
 
-  <!-- JOUW BESTAANDE SITE (NIET AANGEPAST) -->
-  <!-- (alles wat je al had blijft exact hetzelfde hierboven) -->
+  <!-- NAV -->
+  <header class="nav">
+    <h1 class="logo">Visual<span>Rush</span></h1>
+
+    <nav>
+      <a href="#services">Diensten</a>
+      <a href="#how">Hoe werkt het</a>
+      <a href="#contact" class="btn">Bestel nu</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Turning ideas into impact.</h2>
+    <p>Designs, branding en websites snel en clean geleverd.</p>
+    <a href="#contact" class="btn big">Bestel nu</a>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <h3>Diensten</h3>
+    <div class="cards">
+      <div class="card">
+        <h4>Presentaties</h4>
+        <p>PowerPoint & school slides</p>
+      </div>
+      <div class="card">
+        <h4>Design</h4>
+        <p>Posters & social media</p>
+      </div>
+      <div class="card">
+        <h4>Websites</h4>
+        <p>Custom coded websites</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how" class="section dark">
+    <h3>Hoe werkt het</h3>
+    <div class="steps">
+      <div class="step">1. Bestel</div>
+      <div class="step">2. Wij maken</div>
+      <div class="step">3. Jij ontvangt</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h3>Bestel nu</h3>
+    <form>
+      <input type="text" placeholder="Naam" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Beschrijving"></textarea>
+      <button class="btn">Versturen</button>
+    </form>
+  </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 VisualRush. All rights reserved.</p>
-    <p>📧 gamingalexander230@gmail.com</p>
-    <p class="lang" data-en="Follow us:" data-nl="Volg ons:">Volg ons: 
-      <a href="#">Instagram</a> | 
-      <a href="#">Discord</a>
-    </p>
+    © 2026 VisualRush
   </footer>
 
-  <!-- CHAT HTML -->
+  <!-- CHAT -->
   <button id="vr-btn">💬</button>
   <div id="vr-chat"></div>
 
-  <!-- JOUW BESTAANDE LANGUAGE SCRIPT -->
-  <script>
-    const enBtn = document.getElementById('en');
-    const nlBtn = document.getElementById('nl');
-    const elements = document.querySelectorAll('.lang');
-
-    enBtn.addEventListener('click', () => {
-      elements.forEach(el => el.textContent = el.getAttribute('data-en'));
-      enBtn.classList.add('active');
-      nlBtn.classList.remove('active');
-    });
-
-    nlBtn.addEventListener('click', () => {
-      elements.forEach(el => el.textContent = el.getAttribute('data-nl'));
-      nlBtn.classList.add('active');
-      enBtn.classList.remove('active');
-    });
-  </script>
-
   <!-- CHAT SCRIPT -->
   <script>
-  const APP_ID = "69e7879ef456e7739a57401d";
-  const API_KEY = "df4e3310b5f14271b2b3b1075e27bcf6";
+    const APP_ID = "69e7879ef456e7739a57401d";
+    const API_KEY = "df4e3310b5f14271b2b3b1075e27bcf6";
 
-  let ticketId = localStorage.getItem("vr_ticket_id");
-  let clientName = localStorage.getItem("vr_name");
-  let clientEmail = localStorage.getItem("vr_email");
+    const chat = document.getElementById("vr-chat");
+    const btn = document.getElementById("vr-btn");
 
-  const chat = document.getElementById("vr-chat");
-  const btn = document.getElementById("vr-btn");
+    let ticketId = localStorage.getItem("vr_ticket");
 
-  btn.onclick = () => {
-    chat.classList.toggle("open");
-    if (chat.classList.contains("open")) {
-      if (ticketId) renderChat();
-      else renderSetup();
-    }
-  };
-
-  function renderSetup() {
-    chat.innerHTML = `
-      <div id="vr-header">VisualRush Support</div>
-      <div id="vr-setup">
-        <input id="vr-name" placeholder="Naam">
-        <input id="vr-email" placeholder="Email">
-        <textarea id="vr-msg" placeholder="Waarmee kunnen we helpen?"></textarea>
-        <button id="vr-start">Start chat</button>
-      </div>
-    `;
-    document.getElementById("vr-start").onclick = startChat;
-  }
-
-  async function startChat() {
-    const name = document.getElementById("vr-name").value;
-    const email = document.getElementById("vr-email").value;
-    const msg = document.getElementById("vr-msg").value;
-
-    if (!name || !email) return alert("Vul alles in");
-
-    const res = await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": API_KEY
-      },
-      body: JSON.stringify({
-        client_name: name,
-        client_email: email,
-        subject: "Website chat",
-        messages: msg ? [{
-          sender: email,
-          sender_name: name,
-          content: msg,
-          timestamp: new Date().toISOString(),
-          is_client: true
-        }] : [],
-        status: "Open"
-      })
-    });
-
-    const data = await res.json();
-
-    ticketId = data.id;
-    clientName = name;
-    clientEmail = email;
-
-    localStorage.setItem("vr_ticket_id", ticketId);
-    localStorage.setItem("vr_name", name);
-    localStorage.setItem("vr_email", email);
-
-    renderChat();
-  }
-
-  function renderChat() {
-    chat.innerHTML = `
-      <div id="vr-header">VisualRush Support</div>
-      <div id="vr-msgs"></div>
-      <form id="vr-form">
-        <input id="vr-input" placeholder="Typ een bericht...">
-        <button id="vr-send">→</button>
-      </form>
-    `;
-
-    document.getElementById("vr-form").addEventListener("submit", sendMessage);
-
-    document.getElementById("vr-input").addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        sendMessage(e);
+    btn.onclick = () => {
+      chat.classList.toggle("open");
+      if (chat.classList.contains("open")) {
+        ticketId ? loadChat() : setup();
       }
-    });
+    };
 
-    loadMessages();
-  }
+    function setup() {
+      chat.innerHTML = `
+        <div class="header">Support</div>
+        <div class="setup">
+          <input id="name" placeholder="Naam">
+          <input id="email" placeholder="Email">
+          <textarea id="msg" placeholder="Bericht"></textarea>
+          <button id="start">Start</button>
+        </div>
+      `;
 
-  async function loadMessages() {
-    if (!ticketId) return;
+      document.getElementById("start").onclick = start;
+    }
 
-    const res = await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket/${ticketId}`, {
-      headers: { "x-api-key": API_KEY }
-    });
+    async function start() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const msg = document.getElementById("msg").value;
 
-    const data = await res.json();
+      const res = await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": API_KEY
+        },
+        body: JSON.stringify({
+          client_name: name,
+          client_email: email,
+          subject: "Chat",
+          messages: [{
+            sender: email,
+            sender_name: name,
+            content: msg,
+            timestamp: new Date().toISOString(),
+            is_client: true
+          }],
+          status: "Open"
+        })
+      });
 
-    const container = document.getElementById("vr-msgs");
-    if (!container) return;
+      const data = await res.json();
+      ticketId = data.id;
+      localStorage.setItem("vr_ticket", ticketId);
 
-    container.innerHTML = "";
+      loadChat();
+    }
 
-    (data.messages || []).forEach(m => {
-      const el = document.createElement("div");
-      el.className = "vr-msg " + (m.is_client ? "client" : "agent");
-      el.textContent = m.content;
-      container.appendChild(el);
-    });
+    function loadChat() {
+      chat.innerHTML = `
+        <div class="header">Support</div>
+        <div id="msgs"></div>
+        <form id="form">
+          <input id="input" placeholder="Typ...">
+          <button>→</button>
+        </form>
+      `;
 
-    container.scrollTop = container.scrollHeight;
-  }
+      document.getElementById("form").onsubmit = send;
+      refresh();
+    }
 
-  async function sendMessage(e) {
-    e.preventDefault();
+    async function refresh() {
+      if (!ticketId) return;
 
-    const input = document.getElementById("vr-input");
-    const text = input.value.trim();
-    if (!text) return;
+      const res = await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket/${ticketId}`, {
+        headers: { "x-api-key": API_KEY }
+      });
 
-    input.value = "";
+      const data = await res.json();
+      const box = document.getElementById("msgs");
 
-    const res = await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket/${ticketId}`, {
-      headers: { "x-api-key": API_KEY }
-    });
+      if (!box) return;
 
-    const ticket = await res.json();
+      box.innerHTML = "";
 
-    const updatedMessages = [
-      ...(ticket.messages || []),
-      {
-        sender: clientEmail,
-        sender_name: clientName,
+      (data.messages || []).forEach(m => {
+        const div = document.createElement("div");
+        div.className = m.is_client ? "me" : "agent";
+        div.textContent = m.content;
+        box.appendChild(div);
+      });
+
+      box.scrollTop = box.scrollHeight;
+    }
+
+    async function send(e) {
+      e.preventDefault();
+
+      const input = document.getElementById("input");
+      const text = input.value;
+      input.value = "";
+
+      const res = await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket/${ticketId}`, {
+        headers: { "x-api-key": API_KEY }
+      });
+
+      const ticket = await res.json();
+
+      ticket.messages.push({
+        sender: "client",
+        sender_name: "client",
         content: text,
         timestamp: new Date().toISOString(),
         is_client: true
-      }
-    ];
+      });
 
-    await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket/${ticketId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": API_KEY
-      },
-      body: JSON.stringify({
-        messages: updatedMessages,
-        status: "Open"
-      })
-    });
+      await fetch(`https://api.base44.com/api/apps/${APP_ID}/entities/SupportTicket/${ticketId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": API_KEY
+        },
+        body: JSON.stringify(ticket)
+      });
 
-    loadMessages();
-  }
+      refresh();
+    }
 
-  setInterval(() => {
-    if (chat.classList.contains("open")) loadMessages();
-  }, 4000);
+    setInterval(refresh, 4000);
   </script>
 
 </body>
