@@ -226,6 +226,119 @@ footer a {
   }
 }
 
+/* ========================= */
+/* CHAT WIDGET */
+/* ========================= */
+
+#vr-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00ff88;
+  color: #000;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 9999;
+}
+
+#vr-chat {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  height: 420px;
+  background: #161616;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+#vr-chat.open {
+  display: flex;
+}
+
+#vr-header {
+  background: #111;
+  padding: 12px;
+  font-weight: 600;
+}
+
+#vr-msgs {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vr-msg {
+  max-width: 80%;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.vr-msg.client {
+  background: #222;
+  align-self: flex-start;
+}
+
+.vr-msg.agent {
+  background: #00ff88;
+  color: #000;
+  align-self: flex-end;
+}
+
+#vr-form {
+  display: flex;
+  border-top: 1px solid #333;
+}
+
+#vr-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #111;
+  color: #fff;
+  outline: none;
+}
+
+#vr-send {
+  background: #00ff88;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#vr-setup {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#vr-setup input,
+#vr-setup textarea {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #111;
+  color: #fff;
+}
+
+#vr-start {
+  background: #00ff88;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 
 
 
